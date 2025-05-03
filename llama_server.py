@@ -85,6 +85,8 @@ def summarize():
         traceback.print_exc()
         return jsonify({"error": "Eroare la generarea rezumatului."}), 500
 
+app = app  # Expune aplicația Flask pentru Vercel
+
 if __name__ == "__main__":
     print("Starting Flask server on port 5001...")
     app.run(port=5001)
