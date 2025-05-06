@@ -5,6 +5,9 @@ import { join } from 'path';
 import * as express from 'express';
 import * as dotenv from 'dotenv';
 import * as httpProxy from 'http-proxy-middleware';
+import { Server } from 'http';
+
+let server: Server;
 
 async function bootstrap() {
   dotenv.config();
@@ -78,5 +81,16 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   await app.listen(process.env.PORT ?? 3000);
+  server = app.getHttpAdapter().getInstance();
 }
+
 bootstrap();
+
+// Expune handler-ul pentru Vercel
+export default (req, res) => {
+  if (!server) {
+    bootstrap().then(() => server.emit('request', req, res));
+  } else {
+    server.emit('request', req, res);
+  }
+};

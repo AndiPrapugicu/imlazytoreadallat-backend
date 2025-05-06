@@ -2,14 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "llama_server.py",
-      "use": "@vercel/python"
+      "src": "dist/main.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "llama_server.py"
+      "dest": "dist/main.js"
     }
   ]
 }
