@@ -88,5 +88,6 @@ def summarize():
 app = app  # Expune aplicația Flask pentru Vercel
 
 if __name__ == "__main__":
-    print("Starting Flask server on port 5001...")
-    app.run(port=5001)
+    port = int(os.environ.get("PORT", 5001))
+    print(f"Starting Flask server on port {port}...")
+    app.run(host="0.0.0.0", port=port)

@@ -52,9 +52,12 @@ export class FileService {
     );
 
     try {
-      const response = await axios.post('http://localhost:5001/summarize', {
-        text: content,
-      });
+      const response = await axios.post(
+        'https://llama-server-b82l.onrender.com//summarize',
+        {
+          text: content,
+        },
+      );
 
       return response.data.summary || 'Nu s-a putut genera rezumatul.';
     } catch (error) {

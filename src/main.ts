@@ -21,7 +21,7 @@ async function bootstrap() {
   app.use(
     '/summarize',
     httpProxy.createProxyMiddleware({
-      target: 'http://127.0.0.1:5001', // Serverul Flask
+      target: 'https://llama-server-b82l.onrender.com', // Serverul Flask pe Render
       changeOrigin: true,
     }),
   );
