@@ -107,7 +107,7 @@ export class TtsService {
 
       return {
         message: 'Audio generat cu succes!',
-        audioUrl: `http://localhost:3000/uploads/${outputFilename}`,
+        audioUrl: `https://imlazytoreadallat-backend.onrender.com/uploads/${outputFilename}`,
       };
     } catch (error) {
       console.error('Eroare la generarea audio:', error);

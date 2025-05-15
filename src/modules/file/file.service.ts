@@ -53,7 +53,7 @@ export class FileService {
 
     try {
       const response = await axios.post(
-        'https://llama-server-b82l.onrender.com//summarize',
+        'https://llama-server-py.onrender.com/summarize',
         {
           text: content,
         },
