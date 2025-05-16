@@ -14,10 +14,7 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: [
-      // 'http://localhost:5173',
-      'https://imlazytoreadallat.vercel.app',
-    ],
+    origin: ['http://localhost:5173', 'https://imlazytoreadallat.vercel.app'],
     credentials: true,
   });
 
