@@ -24,8 +24,15 @@ async function bootstrap() {
   // Proxy pentru serverul Flask
   app.use(
     '/summarize',
+    (req, res, next) => {
+      if (req.method !== 'POST') {
+        res.status(405).send('Method Not Allowed');
+      } else {
+        next();
+      }
+    },
     httpProxy.createProxyMiddleware({
-      target: 'https://llama-server-py.onrender.com', // Serverul Flask pe Render
+      target: 'https://llama-server-py.onrender.com',
       changeOrigin: true,
     }),
   );
