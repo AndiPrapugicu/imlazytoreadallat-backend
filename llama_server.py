@@ -49,14 +49,18 @@ def summarize():
             "error": "Modelul nu a fost încărcat corect. Verificați logurile serverului."
         }), 500
 
-    uploaded = request.files.get("file")
-    if not uploaded:
-        return jsonify({"error": "Nu s-a trimis niciun fișier"}), 400
-
-    try:
-        text = uploaded.read().decode("utf-8")
-    except Exception:
-        return jsonify({"error": "Nu am putut citi fișierul ca text UTF-8"}), 400
+    # Încearcă să citești textul din body JSON
+    if request.is_json:
+        data = request.get_json()
+        text = data.get("text", "")
+    else:
+        uploaded = request.files.get("file")
+        if not uploaded:
+            return jsonify({"error": "Nu s-a trimis niciun fișier"}), 400
+        try:
+            text = uploaded.read().decode("utf-8")
+        except Exception:
+            return jsonify({"error": "Nu am putut citi fișierul ca text UTF-8"}), 400
 
     if not text.strip():
         return jsonify({"error": "Textul din fișier este gol"}), 400
